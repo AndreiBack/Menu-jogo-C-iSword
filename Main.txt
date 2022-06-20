@@ -1,0 +1,113 @@
+//Grupo 3: Alex Biedermann, Andrei Back, Cleyton da Silva, Luis Rodriguez 
+//Data: 31/05/2022
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <locale.h>
+#include<string.h>
+#include "FuncoesJogo.h"
+
+
+int main()
+{
+
+    setlocale(LC_ALL, "Portuguese");
+
+    int opc;
+    while(opc != 4)
+    {
+
+        printf("Bem vindo ao iSword \n");
+        printf("Escolha as opções de 1 ate 4 \n");
+        printf(" 1- Jogar \n");
+        printf(" 2- Ranking \n");
+        printf(" 3- Créditos\n");
+        printf(" 4- Exit \n");
+
+        scanf("%d",&opc);
+        getchar();
+
+
+        switch(opc)
+        {
+
+        case 1:
+            system("cls");
+
+            int p = 0;
+            int seguir,seleccion;
+            mostrarjogadores();
+            printf("Selecione um jogador ou crie um novo \n");
+            scanf("%d",&seleccion);
+            getchar();
+
+            switch(seleccion)
+            {
+
+            case 1:
+                system("cls");
+                printf("Em construção \n");
+                break;
+
+            case 2:
+                system("cls");
+                printf("Em construção \n");
+                break;
+
+            case 3:
+                system("cls");
+                printf("Em construção \n");
+                break;
+
+            case 4:
+                system("cls");
+                printf("Bem vindo ao iSword \n");
+
+                if(p <= 2)
+                {
+                    registro_jogador();
+
+                }
+            }
+            break;
+        case 2:
+            ordenar();
+            imprimirRanking();
+            break;
+
+
+        case 3:
+            system("cls");
+            by();
+            break;
+
+        case 4:
+            system("cls");
+            int saida;
+            printf("tem certeza? 1-sim ou 2- nao \n");
+            scanf("%d",&saida);
+            getchar();
+
+            if(saida != 1)
+            {
+                opc = 0 ;
+            }
+
+            else
+            {
+                printf("Obrigado por jogar nosso game e até breve!\n");
+
+                exit(1);
+            }
+            break;
+
+        default:
+            printf("Opção inválida, tente novamente \n");
+
+        }
+        system("pause");
+        system("cls");
+    }
+
+    return 0;
+}

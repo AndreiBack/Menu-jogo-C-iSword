@@ -1,0 +1,165 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <locale.h>
+#include<string.h>
+#include<locale.h>
+#include "FuncoesJogo.h"
+
+typedef struct
+{
+    int pontos;
+    char nome[20];
+
+} placar;
+
+placar ranking[3];
+
+int jog = 0;
+
+void registro_jogador()
+{
+    int p=0;
+    char nome[20];
+    int pontos,tamanho,enc=-1;
+    FILE *pontarq;
+    pontarq = fopen("jogadores.txt","w");
+
+    if(pontarq ==  NULL)
+    {
+        printf("Erro ao abrir o arquivo \n");
+        exit(-1);
+    }
+
+    printf("Insira o nome do jogador-> \n");
+    gets(nome);
+    printf("Insira os pontos->\n");
+    scanf("%d",&pontos);
+    getchar();
+
+    for(p = 0; p < jog; p++)
+    {
+
+        if(strcmp(nome, ranking[p].nome)== 0)
+        {
+            enc = p;
+            break;
+        }
+
+    }
+    tamanho = strlen(nome);
+
+    if(enc == -1)
+    {
+        enc = jog;
+        strcpy(ranking[enc].nome,nome);
+        for(int i = 0; i < tamanho; i++)
+        {
+            fputc(nome[i],pontarq);
+        }
+        jog++;
+    }
+    ranking[enc].pontos = pontos;
+    fprintf(pontarq," %d \n",ranking[enc].pontos);
+    system("cls");
+    printf("Jogador adicionado \n");
+    printf("Nome: %s Pontos: %d \n",ranking[enc].nome,ranking[enc].pontos);
+    system("pause");
+    system("cls");
+    printf("Em construção \n");
+    fclose(pontarq);
+}
+
+void imprimirRanking(void)
+{
+    FILE *pontarq;
+    pontarq = fopen("jogadores.txt","r");
+    int i;
+    system("cls");
+    if(pontarq==NULL)
+    {
+        printf("Erro ao abrir arquivo \n");
+        exit(-1);
+    }
+    printf("Ranking de jogadores->\n\n");
+    for(i=0; i<3; i++)
+    {
+        fscanf(pontarq,"%s %d",&ranking[i].nome,&ranking[i].pontos);
+        printf("Rank: %d  Pontos: %d Nome: %s \n", i+1,ranking[i].pontos,ranking[i].nome);
+    }
+    fclose(pontarq);
+}
+
+
+void ordenar(void)
+{
+    int ord;
+    placar aux;
+    FILE *pontarq;
+    pontarq = fopen("jogadores.txt","a");
+
+    if(pontarq == NULL)
+    {
+        printf("Error ao abrir o arquivo \n");
+        exit(-1);
+    }
+
+    do
+    {
+        ord=0;
+        for(int i = 0; i<2; i++)
+        {
+            fscanf(pontarq,"%s %d",&ranking[i].nome,&ranking[i].pontos);
+            if(ranking[i].pontos < ranking[i+1].pontos)
+            {
+                aux= ranking[i+1];
+                ranking[i+1] = ranking[i];
+                ranking[i] = aux;
+                ord = 1;
+            }
+        }
+
+    }
+    while(ord==1);
+
+    fclose(pontarq);
+
+}
+
+void constr (void)
+{
+
+    printf("Em construção \n");
+
+}
+
+void by (void)
+{
+    printf("Desenvolvido by \n Luis \n Cleyton \n Andrei \n Alex\n");
+
+}
+
+
+void mostrarjogadores (void)
+{
+
+    FILE *pontarq;
+    int jogador;
+    pontarq = fopen("jogadores.txt","r");
+
+    if(pontarq == NULL)
+    {
+        printf("Erro ao abrir o arquivo \n");
+        exit(-1);
+    }
+
+    for( int i = 0; i < 3; i++)
+    {
+        fscanf(pontarq,"%s",&ranking[i].nome);
+        printf("%d - jogador: %s \n", i+1,ranking[i].nome);
+    }
+    printf("4 - Criar novo jogador \n\n");
+
+    fclose(pontarq);
+
+}
+

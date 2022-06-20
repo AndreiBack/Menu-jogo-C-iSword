@@ -1,0 +1,17 @@
+#ifndef FUNCOESJOGO_H_INCLUDED
+#define FUNCOESJOGO_H_INCLUDED
+
+
+void registro_jogador(void);
+
+void imprimirRanking(void);
+
+void ordenar(void);
+
+void constr (void);
+
+void by (void);
+
+void mostrarjogadores(void);
+
+#endif // FUNCOESJOGO_H_INCLUDED
